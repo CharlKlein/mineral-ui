@@ -1,7 +1,14 @@
 /* @flow */
-import colors from '../colors';
+import tokens, {
+  black,
+  brand,
+  gray,
+  white
+} from 'mineral-ui-tokens';
+import palette from '../colors';
 import createColorRamp from './createColorRamp';
-import tokens from './tokens';
+import fontSize_base from './fontSizeBase';
+import themeFromTokens from './themeFromTokens';
 
 type Colors =
   | 'blue'
@@ -16,22 +23,32 @@ type Colors =
   | 'sky'
   | 'slate'
   | 'teal';
+type Ramp = { [string]: string };
 
-export const defaultBaseColor = 'blue';
+const defaultBaseColor = 'blue';
+
+const grayRamp = createColorRamp(gray, 'color_gray');
+
+const getThemeRamp = (themeRamp?: Ramp) => {
+  return themeRamp || createColorRamp(brand, 'color_theme');
+};
 
 export default function createTheme(
   baseColor?: Colors = defaultBaseColor,
   overrides?: { [string]: any } = {}
 ): { [string]: any } {
-  const themeRamp = createColorRamp(baseColor, 'color_theme', colors);
+  let themeRamp;
+  if (baseColor !== defaultBaseColor) {
+    themeRamp = createColorRamp(palette, 'color_theme', baseColor);
+  }
 
   return {
-    ...tokens.reduce((acc, token) => {
-      const values = Object.keys(token).map((key) => token[key])[0];
-      const returnedValues =
-        typeof values === 'function' ? values(themeRamp) : values;
-      return Object.assign(acc, returnedValues);
-    }, {}),
+    ...themeFromTokens({ themeRamp, tokens }),
+    fontSize_base,
+    ...getThemeRamp(themeRamp),
+    color_white: white,
+    ...grayRamp,
+    color_black: black,
     ...overrides
   };
 }

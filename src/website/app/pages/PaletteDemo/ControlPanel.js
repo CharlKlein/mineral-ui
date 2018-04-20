@@ -1,6 +1,6 @@
 /* @flow */
 import React from 'react';
-import colors from '../../../../library/colors';
+import colors, { gray } from '../../../../library/colors';
 import { createStyledComponent } from '../../../../library/styles';
 import { createColorRamp, ThemeProvider } from '../../../../library/themes';
 import Paragraph from '../../Paragraph';
@@ -62,8 +62,8 @@ export default function ControlPanel({
   changeTheme,
   theme
 }: Props) {
-  const themeRamp = createColorRamp(activeColor, 'color_theme', colors);
-  const grayRamp = createColorRamp('gray', 'gray', colors);
+  const themeRamp = createColorRamp(colors, 'color_theme', activeColor);
+  const grayRamp = createColorRamp(gray, 'gray');
 
   return (
     <Root>

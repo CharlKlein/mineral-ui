@@ -21,6 +21,7 @@
     "build:icons": "npm i --prefix ./packages/mineral-ui-icons && npm run build:icons --prefix ./packages/mineral-ui-icons",
     "build:library": "./scripts/build-library.js",
     "build:package": "./scripts/build-package.js",
+    "build:tokens": "npm i --prefix ./packages/mineral-ui-tokens && npm run build:tokens --prefix ./packages/mineral-ui-tokens",
     "build:website": "./scripts/build-website.js",
     "clean": "rm -rf dist",
     "commit": "git-cz",

@@ -1,0 +1,6 @@
+{
+  "imports": [
+    "./palette/index.json",
+    "./withoutPalette.json"
+  ]
+}

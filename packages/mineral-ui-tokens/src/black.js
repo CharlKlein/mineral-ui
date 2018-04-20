@@ -1,0 +1,1 @@
+export default '#1d1f24';
